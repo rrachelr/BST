@@ -2,7 +2,7 @@
  * bstNode.hpp
  *
  *  Created on: Oct 11, 2022
- *      Author: rachelrobins
+ *      Author: Rachel Robins
  */
 
 #ifndef BSTNODE_HPP_
@@ -10,7 +10,8 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <Student.hpp>
+#include "Student.hpp"
+using namespace std;
 
 class bstNode {
 	bstNode *left;

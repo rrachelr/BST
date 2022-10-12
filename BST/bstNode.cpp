@@ -2,7 +2,7 @@
  * bstNode.cpp
  *
  *  Created on: Oct 11, 2022
- *      Author: rachelrobins
+ *      Author: Rachel Robins
  */
 
 #include <stdlib.h>
@@ -31,3 +31,6 @@ bstNode::~bstNode(){
 
 }
 
+void printNode(){
+	cout << "Height of node: " << bstNode::height << ", Name: " << bstNode::student << endl;
+}

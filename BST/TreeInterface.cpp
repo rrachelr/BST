@@ -5,6 +5,8 @@
 
 
 #include "TreeInterface.hpp"
+#include "bstNode.hpp"
+#include "bst.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
