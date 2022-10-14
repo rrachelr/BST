@@ -5,8 +5,8 @@
  *      Author: Rachel Robins
  */
 
-#include <stdlib.h>
 #include <iostream>
+#include <stdlib.h>
 #include "bstNode.hpp"
 #include "Student.hpp"
 using namespace std;
@@ -31,9 +31,7 @@ bstNode::~bstNode(){
 
 }
 
-void printNode(){
-	bstNode *n = new bstNode();
-	n->left;
-	n->right;
-	cout << "Height of node: " << n->left << ", Name: " << n->right << endl;
+void bstNode::printNode(){
+	cout << "Height of node: " << height << ", Name: " << student->first << " " << student->last << endl;
+	cout << "Humor: " << student->joke << endl;
 }

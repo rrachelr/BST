@@ -9,6 +9,8 @@
 #define bst_HPP_
 
 #include "bstNode.hpp"
+#include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 class bst {

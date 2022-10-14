@@ -8,12 +8,11 @@
 #ifndef BSTNODE_HPP_
 #define BSTNODE_HPP_
 
-#include <iostream>
-#include <stdlib.h>
 #include "Student.hpp"
 using namespace std;
 
 class bstNode {
+	friend class bst;
 	bstNode *left;
 	bstNode *right;
 	bstNode *parent;
