@@ -26,7 +26,6 @@ bool bst::insert(string f, string l, int n, string j){
 	bstNode *curr = root;
 	if (root == NULL){
 		root = node;
-		cout <<"set root node to " << root->student->last<<endl;
 		return true;
 	} else {
 		while (curr != NULL){
@@ -35,7 +34,6 @@ bool bst::insert(string f, string l, int n, string j){
 					curr->left = node;
 					curr->left->parent = curr;
 					setHeight(curr->left);
-					cout <<"inserted left node " << curr->student->last <<endl;
 					return true;
 				}
 				curr = curr->left;
@@ -44,7 +42,6 @@ bool bst::insert(string f, string l, int n, string j){
 					curr->right = node;
 					curr->right->parent = curr;
 					setHeight(curr->right);
-					cout <<"inserted right node " << curr->student->last <<endl;
 					return true;
 				}
 				curr = curr->right;
@@ -53,7 +50,6 @@ bool bst::insert(string f, string l, int n, string j){
 					curr->left = node;
 					curr->left->parent = curr;
 					setHeight(curr->left);
-					cout <<"inserted left node " << curr->student->first <<endl;
 					return true;
 				}
 				curr = curr->left;
@@ -62,7 +58,6 @@ bool bst::insert(string f, string l, int n, string j){
 					curr->right = node;
 					curr->right->parent = curr;
 					setHeight(curr->right);
-					cout <<"inserted right node " << curr->student->first <<endl;
 					return true;
 				}
 				curr = curr->right;
@@ -75,25 +70,33 @@ bool bst::insert(string f, string l, int n, string j){
 }
 
 bstNode *bst::find(string l, string f){
-	//bstNode *curr
+	bstNode *curr = root;
+	int count = 0;
 	if (root == NULL){
+		cout << "root is NULL" <<endl;
 		return NULL;
 	} else {
-		if (l == root->student->last){
-			if (f == root->student->first){
-				return root;
+		while (curr != NULL){
+			if (l < curr->student->last){
+				curr = curr->left;
+				count++;
+			} else if (l > curr->student->last){
+				curr = curr->right;
+				count++;
+			} else if (l == curr->student->last){
+				if (f == curr->student->first){
+					curr->printNode();
+					count++;
+					cout<<"found in " << count << " comparisons" <<endl;
+					return curr;
+				} else {
+					curr = curr->left;
+					count++;
+				}
 			}
-			return find(root->right->student->last, root->right->student->first);
 		}
-		if (l < root->student->last){
-			return find(root->left->student->last, root->left->student->first);
-		}
-		if (l > root->student->last){
-			return find(root->right->student->last, root->right->student->first);
-		}
-		return NULL;
 	}
-
+	return NULL;
 }
 
 
