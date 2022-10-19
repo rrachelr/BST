@@ -2,7 +2,7 @@
  * bst.hpp
  *
  *  Created on: Oct 11, 2022
- *      Author: Rachel Robins
+ *      Author: Rachel Robins and Jon O'Connell
  */
 
 #ifndef bst_HPP_
