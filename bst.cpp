@@ -73,7 +73,6 @@ bstNode *bst::find(string l, string f){
 	bstNode *curr = root;
 	int count = 0;
 	if (root == NULL){
-		cout << "root is NULL" <<endl;
 		return NULL;
 	} else {
 		while (curr != NULL){
@@ -101,43 +100,63 @@ bstNode *bst::find(string l, string f){
 
 
 bstNode *bst::removeNoKids(bstNode *tmp){
-	tmp->parent = NULL;
+	if (tmp->parent->left == tmp){
+		tmp->parent->left = NULL;
+	} else {
+		tmp->parent->right = NULL;
+	}
 	delete tmp;
 	return tmp;
 }
 
 bstNode *bst::removeOneKid(bstNode *tmp, bool leftFlag){
 	if (leftFlag == true){
-		tmp->parent = tmp->left;
+		if (tmp->parent->left == tmp){
+			tmp->parent->left = tmp->left;
+			tmp->left->parent = tmp->parent;
+		} else {
+			tmp->parent->right = tmp->left;
+			tmp->left->parent = tmp->parent;
+		}
+		setHeight(tmp->left);
 	} else {
-		tmp->parent = tmp->right;
+		if (tmp->parent->right == tmp) {
+			tmp->parent->right = tmp->right;
+			tmp->right->parent = tmp->parent;
+		} else {
+			tmp->parent->left = tmp->right;
+			tmp->right->parent = tmp->parent;
+		}
+		setHeight(tmp->right);
 	}
 	delete tmp;
 	return tmp;
 }
 
-bstNode *bst::remove(string f, string l){
-	bstNode *n = find(l, f);
-	if (n->left == NULL && n->right == NULL){
-		n = removeNoKids(n);
-	} else if (n->left != NULL && n->right == NULL){
-		n = removeOneKid(n, true);
-	} else if (n->left == NULL && n->right != NULL){
-		n = removeOneKid(n, false);
-	} else {
-		n = n->left;
-		while (n && n->right != NULL){
-			n = n->right;
+bstNode *bst::remove(string l, string f){
+	bstNode *curr = find(l, f);
+	if ((curr->left == NULL) && (curr->right == NULL)){
+		return removeNoKids(curr);
+	} else if ((curr->left == NULL)&&(curr->right !=NULL )) {
+		return removeOneKid(curr, false);
+	} else if ((curr->left != NULL)&&(curr->right == NULL)) {
+		return removeOneKid(curr, true);
+	} else if ((curr->left != NULL) && (curr->right != NULL)){
+		bstNode *n = curr;
+		curr = curr->left;
+		while(curr->right != NULL){
+			curr = curr->right;
 		}
-		if (n->left == NULL && n->right == NULL){
-			n = removeNoKids(n);
-		} else if (n->left != NULL && n->right == NULL){
-			n = removeOneKid(n, true);
-		} else if (n->left == NULL && n->right != NULL){
-			n = removeOneKid(n, false);
+		bstNode *n2 = curr;
+		if ((n->left == NULL) && (n->right == NULL)){
+			return removeNoKids(n);
+		} else if ((n->left == NULL)&&(n->right !=NULL )) {
+			return removeOneKid(n, false);
+		} else if ((n->left != NULL)&&(n->right == NULL)) {
+			return removeOneKid(n, true);
 		}
 	}
-	return n;
+	return curr;
 }
 
 void bst::setHeight(bstNode *n){
@@ -146,7 +165,6 @@ void bst::setHeight(bstNode *n){
 		n->parent->height = n->height + 1;
 		n = n->parent;
 	}
-
 }
 
 void bst::clearTree() { //clears out an old tree

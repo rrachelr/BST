@@ -30,7 +30,7 @@ public:
 	void clearTree(bstNode *tmp);
 	bstNode *removeNoKids(bstNode *tmp);
 	bstNode *removeOneKid(bstNode *tmp, bool leftFlag);
-	bstNode *remove(string f, string l);
+	bstNode *remove(string l, string f);
 	void setHeight(bstNode *n);
 };
 
