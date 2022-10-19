@@ -26,29 +26,56 @@ bool bst::insert(string f, string l, int n, string j){
 	bstNode *curr = root;
 	if (root == NULL){
 		root = node;
+		cout <<"set root node to " << root->student->last<<endl;
 		return true;
-	}
-	if (node->student->last < curr->student->last) {
-		if (curr->left == NULL){
-			curr->left = node;
-			node->parent = curr;
-			return true;
+	} else {
+		while (curr != NULL){
+			if (node->student->last < curr->student->last){
+				if (curr->left == NULL){
+					curr->left = node;
+					curr->left->parent = curr;
+					setHeight(curr->left);
+					cout <<"inserted left node " << curr->student->last <<endl;
+					return true;
+				}
+				curr = curr->left;
+			} else if (node->student->last > curr->student->last){
+				if (curr->right == NULL){
+					curr->right = node;
+					curr->right->parent = curr;
+					setHeight(curr->right);
+					cout <<"inserted right node " << curr->student->last <<endl;
+					return true;
+				}
+				curr = curr->right;
+			} else if (node->student->first < curr->student->last){
+				if (curr->left == NULL){
+					curr->left = node;
+					curr->left->parent = curr;
+					setHeight(curr->left);
+					cout <<"inserted left node " << curr->student->first <<endl;
+					return true;
+				}
+				curr = curr->left;
+			} else if (node->student->first > curr->student->first){
+				if (curr->right == NULL){
+					curr->right = node;
+					curr->right->parent = curr;
+					setHeight(curr->right);
+					cout <<"inserted right node " << curr->student->first <<endl;
+					return true;
+				}
+				curr = curr->right;
+			} else {
+				return false;
+			}
 		}
-		insert(curr->left->student->first, curr->left->student->last, curr->left->student->fav_num, curr->left->student->joke);
-		setHeight(curr->left);
-	} else if (node->student->last > curr->student->last){
-		if (curr->right == NULL){
-			curr->right = node;
-			node->parent = curr;
-			return true;
-		}
-		insert(curr->right->student->first, curr->right->student->last, curr->right->student->fav_num, curr->right->student->joke);
-		setHeight(curr->right);
+		return false;
 	}
-	return false;
 }
 
 bstNode *bst::find(string l, string f){
+	//bstNode *curr
 	if (root == NULL){
 		return NULL;
 	} else {
@@ -112,7 +139,7 @@ bstNode *bst::remove(string f, string l){
 
 void bst::setHeight(bstNode *n){
 	n->height = 1;
-	while ((n->parent != NULL) && (n->height != n->parent->height)){
+	while ((n->parent != NULL) && (n->height == n->parent->height)){
 		n->parent->height = n->height + 1;
 		n = n->parent;
 	}

@@ -32,6 +32,6 @@ bstNode::~bstNode(){
 }
 
 void bstNode::printNode(){
-	cout << "Height of node: " << height << ", Name: " << student->first << " " << student->last << endl;
+	cout << "Height of node: " << height << ", Name: " << student->last << " " << student->first << endl;
 	cout << "Humor: " << student->joke << endl;
 }
