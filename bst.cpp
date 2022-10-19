@@ -154,7 +154,6 @@ bstNode *bst::remove(string l, string f){
 		n->student->joke = n2->student->joke;
 		if(n2->left == NULL && n2->right == NULL){
 			removeNoKids(n2);
-
 		}
 		else if(n2->left == NULL and n2->right != NULL){
 			removeOneKid(n2,false);
@@ -169,29 +168,26 @@ bstNode *bst::remove(string l, string f){
 }
 
 void bst::setHeight(bstNode *n){
-	if(n->left == NULL && n->right == NULL){
-				n->height = 1;
-				return;
+	n->height = 1;
+	while (n->parent != NULL){
+		if (n->parent->left != NULL && n->parent->right != NULL){
+			if (n->parent->left->height == n->parent->right->height){
+				n->parent->height = n->height + 1;
+				n = n->parent;
+			} else if (n->parent->left->height > n->parent->right->height){
+				n->parent->height = n->parent->left->height + 1;
+				n = n->parent;
+			} else {
+				n->parent->height = n->parent->right->height + 1;
+				n = n->parent;
 			}
-//	else{
-//
-//	}
-//	while ((n->parent != NULL) && (n->height == n->parent->height)){
-//		n->parent->height = n->height + 1;
-//		n = n->parent;
-//	}
-//
-    else {
-        // Find the height of both subtrees
-        // and use the larger one
-        int left_height = setHeight(n->left);
-        int right_height = setHeight(n->right);
-        if (left_height >= right_height)
-            return setHeight + 1;
-        else
-            return setHeight + 1;
-    }
+		} else {
+			n->parent->height = n->height + 1;
+			n = n->parent;
+		}
+	}
 }
+
 
 void bst::clearTree() { //clears out an old tree
 	if (root == NULL) {
@@ -272,3 +268,5 @@ void bst::printTreePost(bstNode *n) {
 		n->printNode();
 	}
 }
+
+
